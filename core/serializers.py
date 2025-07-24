@@ -10,7 +10,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
 class AnimalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Animal
-        fields = ['id', 'name', 'breed', 'category', 'age', 'price', 'image', 'farmer', 'location', 'rating']
+        fields = ['id', 'name', 'breed', 'category', 'age', 'price', 'image_url', 'farmer', 'location', 'rating']
 
 class CartSerializer(serializers.ModelSerializer):
     animal = AnimalSerializer(read_only=True)
@@ -24,7 +24,7 @@ class CartSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     animal = AnimalSerializer(read_only=True)
-    user = serializers.StringRelatedField(allow_null=True)  # Handle nullable user
+    user = serializers.StringRelatedField()
 
     class Meta:
         model = Order

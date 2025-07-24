@@ -15,7 +15,7 @@ class Animal(models.Model):
     category = models.CharField(max_length=100)
     age = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='animals/', null=True, blank=True)
+    image_url = models.URLField(max_length=200, null=True, blank=True)  # Changed to URLField
     farmer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='animals')
     location = models.CharField(max_length=100)
     rating = models.FloatField()
@@ -35,7 +35,7 @@ class Order(models.Model):
         ('Confirmed', 'Confirmed'),
         ('Rejected', 'Rejected'),
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # Nullable
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     animal = models.ForeignKey(Animal, on_delete=models.CASCADE)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='Pending')
     created_at = models.DateTimeField(auto_now_add=True)
